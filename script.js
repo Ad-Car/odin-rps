@@ -15,11 +15,6 @@ function game() {
 	let playerSelection
 	let computerSelection
 	let result
-
-
-//
-//
-//	for (let i = 0; i < 5; i++) {
 //
 		function playRound(playerSelection, computerSelection) {
 			playerSelection = playerSelection.slice(0,1).toUpperCase() + playerSelection.slice(1).toLowerCase() 
@@ -32,8 +27,7 @@ function game() {
 			} else if  (playerSelection === "Scissors"
 				&& computerSelection === "Paper") {
 				return "You win! Scissors beat Paper"
-			} else if  (playerSelection === "Rock"
-				&& computerSelection === "Scissors")
+			} else if  (playerSelection === "Rock" && computerSelection === "Scissors")
 				return "You win! Rock beats Scissors"
 			else if  (playerSelection === "Scissors"
 				&& computerSelection === "Rock") {
@@ -47,33 +41,26 @@ function game() {
 			}
 		}
 
-//		playerSelection = prompt("Enter rock, paper or scissors...","rock");
-
 	const buttons = document.querySelector("#container");
-
+	const results = document.querySelector("#results");
+	const score = document.querySelector("#score");
+	const outcome = document.querySelector("#outcome");
+	
 	buttons.addEventListener("click", (e) => { 
-		console.log(e.target.id); 
 		playerSelection = e.target.id;
 		computerSelection = getComputerChoice()
-		console.log(`Computer: ${computerSelection}`)
 		result = playRound(playerSelection, computerSelection)
 		
 		if(result.slice(4,7) === "win" )  playerScore++ 
 			else if (result.slice(4,8) === "lose") computerScore++
-
-		alert(result)
-//}
-
-		if (playerScore === computerScore) alert("Game is a draw")
-		if (playerScore > computerScore) alert(`You won the game ${playerScore}:${computerScore}!`)
-		if (playerScore < computerScore) alert(`You lost the game ${playerScore}:${computerScore}!`)
+	
+	results.textContent = result
+	score.textContent = `That's ${computerScore} for me, ${playerScore} for you.`
+	if (playerScore === 5) { outcome.textContent = "You won the game!"; return }
+	if (computerScore === 5) {outcome.textContent = "I won the game!"; return }
 
 	});
-
-
 };
-	
-
 
 game()
 
